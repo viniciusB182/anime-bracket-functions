@@ -18,18 +18,13 @@ exports.createNewDatabase = functions.https.onRequest((req, res) => {
 
 exports.allLogoUrl = functions.https.onRequest((req, res) => {
     const dataBase = admin.database()
-    let logoUrlList;
 
-    dataBase.ref('/animes').map(a => {
-        console.log(a);
+    animes.Data.map(a => {
+        a.logo = dataBase.ref().child(a.logo);
+        logoUrlList.push(a);
     });
 
-    // animes.Data.map(a => {
-    //     a.logo = dataBase.ref().child(a.logo);
-    //     logoUrlList.push(a);
-    // });
-
-    // res = logoUrlList;
+    res = logoUrlList;
 
     return res;
 });
