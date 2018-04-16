@@ -13,20 +13,30 @@ exports.createNewDatabase = functions.https.onRequest((req, res) => {
         dataBase.ref('/animes').push(a);
     });
     // Redirect with 303 SEE OTHER to the URL of the pushed object in the Firebase console.
-    return res.redirect(303, dataBase.ref());
+    res.redirect(303, dataBase.ref());
 });
 
-exports.allLogoUrl = functions.https.onRequest((req, res) => {
-    const dataBase = admin.database()
+exports.getAllAnime = functions.https.onRequest((req, res) => {
+    //const dataBase = admin.database();
+    //var animeList = [];
 
-    animes.Data.map(a => {
-        a.logo = dataBase.ref().child(a.logo);
-        logoUrlList.push(a);
-    });
+    // dataBase.ref('/animes').once('value').then(function (snapshot) {
+    //     //snapshot.forEach(function(childSnapshot) {
+    //     animeList = snapshot.val();
+    //     //console.log(childSnapshot.val());
+    //     //});
+    //     //console.log(snapshot.val());
+    // });
 
-    res = logoUrlList;
+    // dataBase.ref('/animes').on("child_added", function (snapshot) {
+    //     var articleData = snapshot.val();
+    //     animeList.push(articleData);
+    //     //console.log(animeList);
+    // });
 
-    return res;
+    //console.log(animeList);
+
+    res.send(animes.Data);
 });
 
 // // Create and Deploy Your First Cloud Functions
