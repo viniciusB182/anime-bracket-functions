@@ -17,30 +17,21 @@ exports.createNewDatabase = functions.https.onRequest((req, res) => {
 });
 
 exports.getAllAnime = functions.https.onRequest((req, res) => {
-    //const dataBase = admin.database();
-    //var animeList = [];
+    const dataBase = admin.database();
+    var animeList = [];
 
-    // dataBase.ref('/animes').once('value').then(function (snapshot) {
-    //     //snapshot.forEach(function(childSnapshot) {
-    //     animeList = snapshot.val();
-    //     //console.log(childSnapshot.val());
-    //     //});
-    //     //console.log(snapshot.val());
-    // });
-
-    // dataBase.ref('/animes').on("child_added", function (snapshot) {
-    //     var articleData = snapshot.val();
-    //     animeList.push(articleData);
-    //     //console.log(animeList);
-    // });
-
-    //console.log(animeList);
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,contenttype'); // If needed
     res.setHeader('Access-Control-Allow-Credentials', true); // If needed);
 
-    res.send(animes.Data);
+
+    dataBase.ref('/animes').on("value", function (snapshot) {
+        snapshot.forEach((anime) => { animeList.push(anime) });
+
+        res.send(animeList);
+    });
+    
 });
 
 // // Create and Deploy Your First Cloud Functions
