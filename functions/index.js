@@ -6,7 +6,8 @@ const cors = require('cors');
 const app = express();
 
 //enable for all origins
-app.use(cors);
+app.use(cors());
+
 admin.initializeApp(functions.config().firebase);
 
 exports.createNewDatabase = functions.https.onRequest((req, res) => {
@@ -22,6 +23,11 @@ exports.createNewDatabase = functions.https.onRequest((req, res) => {
 });
 
 exports.pushWinner = functions.https.onRequest((req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,contenttype'); // If needed
+    res.setHeader('Access-Control-Allow-Credentials', true); // If needed);
+    
     const dataBase = admin.database();
 
     const original = req.query.text;
@@ -32,6 +38,11 @@ exports.pushWinner = functions.https.onRequest((req, res) => {
 });
 
 exports.getAllAnime = functions.https.onRequest((req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,contenttype'); // If needed
+    res.setHeader('Access-Control-Allow-Credentials', true); // If 
+    
     const dataBase = admin.database();
     var animeList = [];
 
