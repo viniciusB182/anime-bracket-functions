@@ -22,12 +22,7 @@ exports.createNewDatabase = functions.https.onRequest((req, res) => {
     res.redirect(303, dataBase.ref());
 });
 
-exports.pushWinner = functions.https.onRequest((req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,contenttype'); // If needed
-    res.setHeader('Access-Control-Allow-Credentials', true); // If needed);
-    
+exports.pushWinner = functions.https.onRequest((req, res) => {  
     const dataBase = admin.database();
 
     const original = req.query.text;
@@ -37,12 +32,7 @@ exports.pushWinner = functions.https.onRequest((req, res) => {
     res.sendStatus(202);
 });
 
-exports.getAllAnime = functions.https.onRequest((req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,contenttype'); // If needed
-    res.setHeader('Access-Control-Allow-Credentials', true); // If 
-    
+exports.getAllAnime = functions.https.onRequest((req, res) => {  
     const dataBase = admin.database();
     var animeList = [];
 
